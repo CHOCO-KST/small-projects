@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./node_modules/animate.css/animate.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class=" container-fluid">
+        <div class=" row">
+            <!-- navigation bar start -->
+            <div class=" col-12 nav-bar bg-light shadow-lg p-0">
+                <div class=" container d-flex justify-content-between align-items-center">
+                    <div class=" nav-logo text-center py-2">
+                        <h1 class=" fs-2 fw-bolder text-primary">My Store</h1>
+                        <p class=" fs-6 fw-bold">Using Bootstrap & jQuery</p>
+                    </div>
+                    <div class=" d-flex justify-content-between align-items-center w-50">
+                        <div class=" search-bar input-group ms-5 w-50">
+                            <input type="search" name="search" id="search-bar" class=" form-control" placeholder=" Search item ...">
+                            <button class=" btn btn-primary bi-search"></button>
+                        </div>
+                        <select name="category" id="category-select" class=" form-control w-25 fw-bold" style="min-width: 100px;">
+                            <option selected value="all">All Category</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- navigation bar end -->
+            <div class=" container">
+                <!-- product items start -->
+                <div class=" col-12 col-lg-10 mt-5 mx-auto card-div row" id="card-div"></div>
+                <!-- product items end -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- floating open cart button start -->
+    <button class=" open-cart-btn bg-primary text-white"><i class=" bi-cart-fill fs-2"></i></button>
+    <!-- floating open cart button end -->
+
+
+    <!-- adding item to cart start -->
+    <div class=" cart-div w-100 vh-100 d-none">
+        <div class=" cart-bg w-100 h-100"></div>
+        <div class=" additem-cart w-25 h-100 bg-light shadow-lg px-3 animate__animated">
+            <button class=" cart-backspace-btn bg-primary text-white"><i class=" fs-4 bi-backspace"></i></button>
+            <div class="text-center pt-3 border-bottom">
+                <h1 class=" fs-4 fw-bolder text-primary">My Cart</h1>
+                <p class="">Added Item to Cart</p>
+            </div>
+            <div class=" item-detil bg-light d-flex justify-content-between py-4">
+                <button class=" btn btn-outline-primary fw-bold"><i class=" bi-cart-check fs-5 me-2"></i>Order Now</button>
+                <div class=" p-2 bg-primary text-white rounded">
+                    <i class=" bi-cart-fill fs-5 px-2"></i>
+                    <span class="item-count fs-5 px-2 fw-bold">0</span>
+                </div> 
+            </div>
+            <!-- added item div -->
+            <div class=" added-item-div w-100 overflow-scroll h-75 pb-5"></div>
+            <div class=" total-cost-div d-flex justify-content-around align-items-center w-100 bg-light">
+                <p class=" fs-5 fw-bold m-0">Total Cost</p>
+                <p class=" fs-5 fw-bold m-0 text-primary"><span class=" total-cost">0</span></p>
+            </div>
+        </div>
+    </div>
+    <!-- adding item to cart end -->
+
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+</html>

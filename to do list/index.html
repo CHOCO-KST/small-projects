@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="animation.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        body {
+            background-color: rgb(119, 189, 255);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .list-div {
+            width: 30em;
+            height: 40em;
+            background: linear-gradient(45deg , rgba(255, 223, 223, 0.253),rgba(242, 253, 255, 0.233));
+            box-shadow: 0 0 20px 5px rgba(28, 37, 49, 0.164);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .list-header-div {
+            flex: 1;
+        }
+
+        .add-list-div {
+            flex: 1;
+        }
+
+        .list-data-div {
+            flex: 6;
+        }
+
+        .list-header {
+            background-color: rgba(253, 253, 253, 0.945);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: 60%;
+            margin: 1em;
+            padding: .5em;
+            box-shadow: 0 0 20px 5px rgba(61, 90, 104, 0.164);
+        }
+
+        .list-header h1 {
+            display: inline-block;
+            font-size: 2em;
+            color: rgb(0, 142, 224);
+        }
+
+        .list-header span {
+            display: inline-block;
+            font-size: 1.5em;
+            color: red;
+            width: 1.8em;
+            height: 1.8em;
+            background-color: rgb(139, 180, 255);
+            line-height: 1.8em;
+            text-align: center;
+            border-radius: 50%;
+            border: 2px solid rgb(255, 155, 155);
+        }
+
+        .add-list {
+            height: 100%;
+            padding: 0 1em;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .text-input-div {
+            height: 60%;
+            width: 90%;
+            background-color: rgba(233, 251, 255, 0.596);
+            display: flex;
+            align-items: center;
+            padding: 0 1em;
+            box-shadow: 0 0 20px 5px rgba(41, 60, 70, 0.164);
+        }
+
+        .text-input-div:hover {
+            background-color: rgba(253, 253, 253, 0.945);
+        }
+
+        #text-node {
+            border: none;
+            font-size: 1.1em;
+            background-color: rgba(255, 255, 255, 0);
+            width: 100%;
+        }
+
+        #text-node:focus {
+            outline: none;
+        }
+
+        #add-btn {
+            background-color: rgba(233, 251, 255, 0.596);
+            display: inline-block;
+            width: 4em;
+            height: 4em;
+            border: none;
+            box-shadow: 0 0 20px 5px rgba(41, 60, 70, 0.164);
+        }
+
+        #add-btn:hover {
+            background-color: rgba(253, 253, 253, 0.945);
+        }
+
+        .ul-list-div {
+            margin: 1em;
+            background-color: rgba(253, 253, 253, 0.945);
+            box-shadow: 0 0 20px 5px rgba(41, 60, 70, 0.164);
+            height: 90%;
+            overflow-y: scroll;
+            padding: 0 .5em;
+        }
+
+        .ul-list-div::-webkit-scrollbar {
+            width: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: 2.5em;
+            border-top: 1px solid gray;
+            padding: 0 .5em;
+        }
+
+        .new-list li:first-child {
+            border: none;
+        }
+
+        li input[type="button"] {
+            background-color: rgb(119, 189, 255);
+            width: 1.9em;
+            height: 1.9em;
+            font-size: .8em;
+            color: red;
+            font-weight: bold;
+            opacity: 0%;
+        }
+
+        li input[type="button"]:hover {
+            background-color: rgba(253, 253, 253, 0.945);
+        }
+        li:hover input[type="button"] {
+            opacity: 100%;
+        }
+
+        .done-list span {
+            color: gray;
+            text-decoration: line-through;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="list-div">
+        <div class="list-header-div">
+            <div class="list-header">
+                <h1>To Do List</h1>
+                <span>0</span>
+            </div>
+        </div>
+        <div class="add-list-div">
+            <div class="add-list">
+                <div class="text-input-div">
+                    <input type="text" name="node" id="text-node" placeholder="add list">
+                </div>
+                <button id="add-btn">Add</button>
+            </div>
+        </div>
+        <div class="list-data-div">
+            <div class="ul-list-div">
+                <ul class="new-list"></ul>
+                <ul class="done-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const new_list = document.querySelector('.new-list');
+        const done_list = document.querySelector('.done-list');
+        const add_btn = document.getElementById('add-btn');
+        const text_input = document.getElementById('text-node')
+
+        let list_id = 1;
+
+        add_btn.addEventListener('click',add_click);
+        text_input.addEventListener('keydown',function(){ key_down(event)})
+        new_list.addEventListener('change',on_change);
+        done_list.addEventListener('change',on_change);
+
+        function add_click() {
+            let node = document.getElementById('text-node');
+            if(node.value == ''){
+                return false;
+            }
+            let node_val = node.value;
+            node.value = '';
+            create_list_node(node_val);
+        }
+
+        function key_down(e) {
+            if(e.keyCode == '13'){
+                add_click()
+            }
+        }
+
+        function create_list_node(val) {
+            let li = document.createElement('li');
+            let checkbox = document.createElement('input');
+            let btn = document.createElement('input')
+            let span = document.createElement('span');
+            let node = document.createTextNode(val);
+            
+            checkbox.type = 'checkbox';
+            checkbox.id = list_id;
+            list_id += 1;
+            span.appendChild(node);
+            
+            btn.type = 'button';
+            btn.value = 'del';
+            btn.addEventListener('click',function() { del(this)});
+
+            li.className = 'animate__animated animate__fadeInDown';
+            li.append(checkbox,span,btn);
+
+            new_list.append(li);
+        }
+
+        function on_change() {
+            let check = document.querySelectorAll('li');
+            check.forEach( function(check) {
+                if(check.firstChild.checked && check.parentElement == new_list) {
+                    done_list.appendChild(check);
+                }else if(!check.firstChild.checked && check.parentElement == done_list){
+                    new_list.appendChild(check);
+                }
+            });
+        }
+
+        function del(del_btn) {
+            del_btn.parentElement.remove();
+        }
+
+
+    </script>
+</body>
+</html>
